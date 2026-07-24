@@ -22,22 +22,28 @@
     <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
 
     <!-- HEADER / NAVBAR -->
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo" onclick="navigateTo('home')">
-                <i class="fa-solid fa-shirt"></i> Fut<span>Store</span>
-            </a>
-            <nav class="nav-links">
-                <a href="#" class="nav-link active" onclick="navigateTo('home')">Início</a>
-                <a href="#" class="nav-link" onclick="navigateTo('camisolas')">Camisolas</a>
-                <a href="#" class="nav-link" onclick="navigateTo('sobre')">Sobre</a>
-                <a href="#" class="nav-link" onclick="navigateTo('contacto')">Contacto</a>
-            </nav>
-            <div class="nav-actions">
+    <!-- HEADER / NAVBAR -->
+<header>
+    <div class="container navbar">
+        <a href="#" class="logo" onclick="navigateTo('home')">
+            <i class="fa-solid fa-shirt"></i> Fut<span>Store</span>
+        </a>
 
-            </div>
-        </div>
-    </header>
+        <!-- 1. ADICIONA ESTE BOTÃO HAMBÚRGUER -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- 2. ADICIONA O ID "nav-menu" À TAG NAV -->
+        <nav class="nav-links" id="nav-menu">
+            <a href="#" class="nav-link active" onclick="navigateTo('home')">Início</a>
+            <a href="#" class="nav-link" onclick="navigateTo('camisolas')">Camisolas</a>
+            <a href="#" class="nav-link" onclick="navigateTo('sobre')">Sobre</a>
+            <a href="#" class="nav-link" onclick="navigateTo('contacto')">Contacto</a>
+        </nav>
+        <div class="nav-actions"></div>
+    </div>
+</header>
 
     <!-- MAIN CONTENT CONTAINER -->
     <main>

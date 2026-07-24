@@ -627,6 +627,51 @@ footer {
     color: var(--text-light);
 }
 
+/* Esconde o botão do menu por padrão em ecrãs de computador */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    /* Mostra o botão hambúrguer */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Estilização do Menu Mobile em dropdown */
+    .nav-links {
+        display: none; /* Escondido por padrão */
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary);
+        padding: 1.5rem;
+        gap: 1.2rem;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+        z-index: 999;
+    }
+
+    /* Classe que o JS vai ativar para mostrar o menu */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .catalog-layout { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    .timeline::before { left: 20px; }
+    .timeline-item { width: 100%; text-align: left !important; padding-left: 50px; }
+    .timeline-item:nth-child(even) { left: 0; }
+    .modal-grid { grid-template-columns: 1fr; }
+}
+
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
     .nav-links { display: none; }

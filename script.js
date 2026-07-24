@@ -215,3 +215,56 @@ function handleContactSubmit(e) {
     alert("Obrigado pela sua mensagem! Responderemos em breve.");
     e.target.reset();
 }
+
+// INITIALIZATION
+document.addEventListener("DOMContentLoaded", () => {
+    renderFeaturedProducts();
+    renderCatalog(products);
+    renderBlog();
+    
+    // Inicializar evento do menu mobile
+    initMobileMenu();
+});
+
+// LÓGICA DO MENU MOBILE
+function initMobileMenu() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Alterna o ícone entre hambúrguer (três traços) e 'X' (fechar)
+            const icon = menuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+}
+
+// ROUTING SYSTEM (Ajustado para fechar o menu mobile ao navegar)
+function navigateTo(pageId) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+    
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Fecha o menu mobile após clicar num link
+    const navMenu = document.getElementById('nav-menu');
+    const menuToggle = document.getElementById('menu-toggle');
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        if (menuToggle) {
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    }
+}
