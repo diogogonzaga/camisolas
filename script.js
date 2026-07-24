@@ -1,11 +1,12 @@
 // DATA STATE
 const products = [
-    { id: 1, name: "Camisola SL Benfica Principal", club: "Benfica", country: "Portugal", league: "Liga Portugal", season: "2026/27", price: 89.99, state: "Novo", img: "https://images.unsplash.com/photo-1580086319619-3ed498161c77?auto=format&fit=crop&w=600&q=80" },
-    { id: 2, name: "Camisola FC Porto Principal", club: "FC Porto", country: "Portugal", league: "Liga Portugal", season: "2026/27", price: 89.99, state: "Novo", img: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=600&q=80" },
-    { id: 3, name: "Camisola Sporting CP Principal", club: "Sporting", country: "Portugal", league: "Liga Portugal", season: "2026/27", price: 89.99, state: "Novo", img: "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=600&q=80" },
-    { id: 4, name: "Camisola Real Madrid Retro 2002", club: "Real Madrid", country: "Espanha", league: "Champions League", season: "Retro", price: 110.00, state: "Retro", img: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=600&q=80" },
-    { id: 5, name: "Camisola FC Barcelona Alternativa", club: "Barcelona", country: "Espanha", league: "La Liga", season: "2025/26", price: 75.00, state: "Novo", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" },
-    { id: 6, name: "Camisola Manchester City Home", club: "Manchester City", country: "Inglaterra", league: "Premier League", season: "2026/27", price: 95.00, state: "Novo", img: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" }
+    { id: 1, name: "Camisola SL Benfica Principal", club: "Benfica", country: "Portugal", league: "Liga Portugal", season: "2026/27", price: 89.99, state: "Novo", img: "images/benfica.jpg" },
+    { id: 2, name: "Camisola FC Porto Principal", club: "FC Porto", country: "Portugal", league: "Liga Portugal", season: "2026/27", price: 89.99, state: "Novo", img: "images/porto.jpg" },
+    { id: 3, name: "Camisola Sporting CP Principal", club: "Sporting", country: "Portugal", league: "Liga Portugal", season: "2026/27", price: 89.99, state: "Novo", img: "images/sporting.jpg" },
+    { id: 4, name: "Camisola Real Madrid Retro 2002", club: "Real Madrid", country: "Espanha", league: "Champions League", season: "Retro", price: 110.00, state: "Retro", img: "images/real.jpg" },
+    { id: 5, name: "Camisola FC Barcelona Alternativa", club: "Barcelona", country: "Espanha", league: "La Liga", season: "2025/26", price: 75.00, state: "Novo", img: "images/barcelona.jpg" },
+    { id: 6, name: "Camisola Manchester City Home", club: "Manchester City", country: "Inglaterra", league: "Premier League", season: "2026/27", price: 95.00, state: "Novo", img: "images/manchester.jpg" },
+    { id: 7, name: "Camisola PSG", club: "PSG", country: "França", league: "Premier League", season: "2026/27", price: 95.00, state: "Novo", img: "images/psg.jpg" }
 ];
 
 const blogPosts = [
@@ -31,7 +32,11 @@ function navigateTo(pageId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// RENDER PRODUCTS
+// RENDER PRODUCTS   <button class="btn btn-primary" onclick="addToCart(${product.id})"><i class="fa-solid fa-cart-plus"></i></button>
+
+
+ 
+
 function createProductCard(product) {
     return `
         <div class="product-card">
@@ -42,7 +47,6 @@ function createProductCard(product) {
                 <h4 class="product-title">${product.name}</h4>
                 <div class="product-price">${product.price.toFixed(2)} €</div>
                 <div class="product-actions">
-                    <button class="btn btn-primary" onclick="addToCart(${product.id})"><i class="fa-solid fa-cart-plus"></i></button>
                     <button class="btn btn-outline" onclick="openProductModal(${product.id})">Ver</button>
                 </div>
             </div>
