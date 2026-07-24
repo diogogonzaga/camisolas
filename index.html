@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutStore & Blog - Camisolas Desportivas</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos CSS Externos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
+
+    <!-- HEADER / NAVBAR -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo" onclick="navigateTo('home')">
+                <i class="fa-solid fa-shirt"></i> Fut<span>Store</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active" onclick="navigateTo('home')">Início</a>
+                <a href="#" class="nav-link" onclick="navigateTo('camisolas')">Camisolas</a>
+                <a href="#" class="nav-link" onclick="navigateTo('blog')">Blog</a>
+                <a href="#" class="nav-link" onclick="navigateTo('sobre')">Sobre</a>
+                <a href="#" class="nav-link" onclick="navigateTo('contacto')">Contacto</a>
+            </nav>
+            <div class="nav-actions">
+                <button class="icon-btn" onclick="openCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main>
+
+        <!-- 1. HOME PAGE -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="container">
+                    <h1>Sente a Paixão do Futebol</h1>
+                    <p>As melhores camisolas oficiais, edições retro exclusivas e as últimas novidades do mundo do futebol.</p>
+                    <button class="btn btn-accent" onclick="navigateTo('camisolas')">Ver Coleção 2026/27</button>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <h3>Envio Rápido</h3>
+                        <p>Entregas em 24/48h para todo o país.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h3>100% Autêntico</h3>
+                        <p>Garantia de qualidade e materiais oficiais.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <h3>Devoluções Simples</h3>
+                        <p>30 dias para trocas ou devolução total.</p>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Destaques da Época</h2>
+                <div class="products-grid" id="home-featured-grid">
+                    <!-- Dinamicamente preenchido pelo JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CAMISOLAS PAGE -->
+        <section id="camisolas" class="page">
+            <div class="container">
+                <h2 class="section-title">Catálogo de Camisolas</h2>
+                
+                <div class="catalog-layout">
+                    <!-- FILTROS SIDEBAR -->
+                    <aside class="filters-sidebar">
+                        <div class="filter-group">
+                            <h4>Pesquisa</h4>
+                            <input type="text" id="search-input" placeholder="Clube, país, época..." oninput="applyFilters()">
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Clube</h4>
+                            <select id="filter-clube" onchange="applyFilters()">
+                                <option value="">Todos os Clubes</option>
+                                <option value="Benfica">SL Benfica</option>
+                                <option value="FC Porto">FC Porto</option>
+                                <option value="Sporting">Sporting CP</option>
+                                <option value="Real Madrid">Real Madrid</option>
+                                <option value="Barcelona">Barcelona</option>
+                                <option value="Manchester City">Manchester City</option>
+                                <option value="PSG">PSG</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Competição</h4>
+                            <select id="filter-liga" onchange="applyFilters()">
+                                <option value="">Todas</option>
+                                <option value="Liga Portugal">Liga Portugal</option>
+                                <option value="Premier League">Premier League</option>
+                                <option value="La Liga">La Liga</option>
+                                <option value="Champions League">Champions League</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Época</h4>
+                            <select id="filter-epoca" onchange="applyFilters()">
+                                <option value="">Todas</option>
+                                <option value="2026/27">2026/27</option>
+                                <option value="2025/26">2025/26</option>
+                                <option value="Retro">Retro</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <h4>Preço Máximo: <span id="price-val">120</span>€</h4>
+                            <input type="range" id="filter-price" min="30" max="150" value="120" oninput="updatePriceLabel(this.value); applyFilters();">
+                        </div>
+
+                        <button class="btn btn-outline" style="width: 100%;" onclick="resetFilters()">Limpar Filtros</button>
+                    </aside>
+
+                    <!-- PRODUTOS GRID -->
+                    <div>
+                        <div class="catalog-header">
+                            <span id="product-count">A mostrar produtos...</span>
+                            <select id="sort-select" onchange="applyFilters()">
+                                <option value="recent">Mais Recentes</option>
+                                <option value="price-asc">Preço: Baixo ao Alto</option>
+                                <option value="price-desc">Preço: Alto ao Baixo</option>
+                            </select>
+                        </div>
+                        <div class="products-grid" id="catalog-products-grid">
+                            <!-- Dinamicamente preenchido pelo JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BLOG PAGE -->
+        <section id="blog" class="page">
+            <div class="container">
+                <h2 class="section-title">Blog do Futebol</h2>
+                <div class="blog-grid" id="blog-grid">
+                    <!-- Conteúdo do Blog preenchido por JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SOBRE PAGE -->
+        <section id="sobre" class="page">
+            <div class="container">
+                <h2 class="section-title">A Nossa História</h2>
+                <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">Fundada por amantes do desporto rei, a FutStore nasceu com a missão de aproximar os adeptos das cores do seu clube de coração através de artigos autênticos e de alta qualidade.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2020 - O Início</h4>
+                            <p>Lançamento da loja online focado em camisolas clássicas retro.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2023 - Expansão Internacional</h4>
+                            <p>Parcerias com as principais marcas para fornecimento de equipamentos oficiais da época.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2026 - A Era Digital</h4>
+                            <p>Lançamento do novo portal interactivo com notícias e venda global.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACTO PAGE -->
+        <section id="contacto" class="page">
+            <div class="container">
+                <h2 class="section-title">Fale Connosco</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-form">
+                        <form onsubmit="handleContactSubmit(event)">
+                            <input type="text" placeholder="Seu Nome" required>
+                            <input type="email" placeholder="Seu Email" required>
+                            <input type="text" placeholder="Assunto" required>
+                            <textarea rows="5" placeholder="Sua Mensagem" required></textarea>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                    <div>
+                        <h3>Informações de Contacto</h3>
+                        <p style="margin-top: 1rem;"><i class="fa-solid fa-location-dot"></i> Estádio José Alvalade / Luz / Dragão, Portugal</p>
+                        <p style="margin-top: 0.5rem;"><i class="fa-solid fa-envelope"></i> contacto@futstore.pt</p>
+                        <p style="margin-top: 0.5rem;"><i class="fa-solid fa-phone"></i> +351 210 000 000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CART DRAWER -->
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button class="icon-btn" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Itens do Carrinho -->
+        </div>
+        <div class="cart-footer">
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 1rem;">
+                <span>Total:</span>
+                <span id="cart-total">0.00 €</span>
+            </div>
+            <button class="btn btn-accent" style="width: 100%;">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- PRODUCT QUICK VIEW MODAL -->
+    <div class="modal" id="product-modal">
+        <div class="modal-grid" id="modal-content">
+            <!-- Preenchido via JS -->
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>FutStore</h4>
+                    <p>A tua loja de confiança para camisolas desportivas e artigos de coleção.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#" onclick="navigateTo('camisolas')">Camisolas</a></li>
+                        <li><a href="#" onclick="navigateTo('blog')">Blog</a></li>
+                        <li><a href="#" onclick="navigateTo('sobre')">Sobre Nós</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Siga-nos</h4>
+                    <div style="display: flex; gap: 1rem; font-size: 1.5rem; margin-top: 0.5rem;">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FutStore. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lógica JavaScript Externa -->
+    <script src="script.js"></script>
+</body>
+</html>
